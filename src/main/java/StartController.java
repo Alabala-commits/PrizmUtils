@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class StartController {
 
-    static final boolean DEBAG = true;
+    static final boolean DEBAG = false;
 
     private static final Logger logger = Logger.getLogger(StartController.class.getName());
 
