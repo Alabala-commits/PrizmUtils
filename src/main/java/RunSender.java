@@ -34,7 +34,7 @@ class RunSender {
         SwingUtilities.invokeLater(SettingWindow::getInstance);
 
         ctrl.setClient(new ClientPrizmHTTP());
-        ctrl.setCalendar(new CalendarHandler(ctrl));
+        ctrl.setCalendar(new CalendarHandler());
 
         logger.info("Sender start\n");
     }

@@ -5,18 +5,15 @@ import java.util.TimerTask;
 
 public class CalendarHandler {
 
-    private final StartController controller;
     private final LocalTime start;
 
     private Timer timer;
     private LocalDate tomorrow;
-    private boolean isTimeToSend;
     private int period;
 
 //=========================================================
 
-    CalendarHandler(StartController controller) {
-        this.controller = controller;
+    CalendarHandler() {
         tomorrow = LocalDate.now().plusDays(1);
         start = LocalTime.now();
         period = 1000 * 60 * 60;
@@ -36,10 +33,10 @@ public class CalendarHandler {
             @Override
             public void run() {
                 if (updateTomorrow()) {
-                    controller.updateBalanceInfo();
-                    controller.sendAll();
+                    StartController.getInstance().updateBalanceInfo();
+                    StartController.getInstance().sendAll();
                 }
-                controller.updateUiInfo();
+                StartController.getInstance().updateUiInfo();
             }
         };
         timer.scheduleAtFixedRate(task, 0, period);
@@ -47,8 +44,7 @@ public class CalendarHandler {
 
     private boolean updateTomorrow() {
         LocalDate now = LocalDate.now();
-        isTimeToSend = tomorrow.isEqual(now);
-        if (isTimeToSend) {
+        if (tomorrow.isEqual(now)) {
             tomorrow = now.plusDays(1);
             return true;
         }
